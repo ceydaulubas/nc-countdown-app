@@ -1,23 +1,23 @@
-<div class="container">
-  <div class="countdown-content">
-    <div class="countdownHeader">
-      <span class="title" #titleElement appFitText>
+<main class="container">
+  <section class="countdown-content">
+    <header class="countdown-header">
+      <h1 class="countdown-title" #titleElement appFitText>
         {{
           countdownForm.title
             ? 'Time to ' + camelCaseTitle
             : 'Enter Event Name and Date to See How Many Days Until!'
         }}
-      </span>
-      <h1 class="date" #countdownElement appFitText>
+      </h1>
+      <p class="date" #countdownElement appFitText>
         {{
           countdownForm.date
             ? isToday(countdownForm.date)
               ? '🎉🎉🎉🎉🎉🎉🎉🎉'
-              : calculateTimeDifference(countdownForm.date)
+              : timeLeft
             : 'No date selected yet. Please select date.'
         }}
-      </h1>
-    </div>
+      </p>
+    </header>
 
     <div class="form-fields">
       <mat-form-field appearance="outline" floatLabel="always">
@@ -46,12 +46,9 @@
           matIconSuffix
           [for]="picker"
         ></mat-datepicker-toggle>
-        <mat-datepicker
-        #picker
-        panelClass="custom-datepicker"
-        >
-      </mat-datepicker>
+        <mat-datepicker #picker panelClass="custom-datepicker">
+        </mat-datepicker>
       </mat-form-field>
     </div>
-  </div>
-</div>
+  </section>
+</main>

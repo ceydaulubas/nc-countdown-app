@@ -1,10 +1,10 @@
-$purple: #72035D;
+$purple: #72035d;
 $lightGreyBg: #f2f1f0;
 $gap: 1rem;
 $formMaxWidth: 400px;
 $formHeight: 48px;
 
-.container {
+main.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@ $formHeight: 48px;
   background: $lightGreyBg;
 }
 
-.countdown-content {
+section.countdown-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +24,7 @@ $formHeight: 48px;
   padding: 2rem;
 }
 
-.countdownHeader {
+header.countdown-header {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -32,8 +32,9 @@ $formHeight: 48px;
   gap: $gap;
 }
 
-.title {
+h1.countdown-title {
   width: 100%;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,8 +42,9 @@ $formHeight: 48px;
   font-weight: 800;
 }
 
-.date {
+p.date {
   width: 100%;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

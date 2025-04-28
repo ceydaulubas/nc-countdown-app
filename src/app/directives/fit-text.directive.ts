@@ -1,4 +1,4 @@
-// Angular Core 
+// Angular Core
 import {
   Directive,
   ElementRef,
@@ -14,7 +14,7 @@ import {
   standalone: true,
 })
 export class FitTextDirective implements AfterViewInit, OnDestroy {
-  // Optional tuning parameter: larger = smaller final font 
+  // Optional tuning parameter: larger = smaller final font
   @Input() compressor = 1
 
   @Input() minFontSize = 16
@@ -44,13 +44,13 @@ export class FitTextDirective implements AfterViewInit, OnDestroy {
     this.mutationObs.disconnect()
   }
 
-  // On window-resize, re-adjust 
+  // On window-resize, re-adjust
   @HostListener('window:resize')
   onResize() {
     this.adjust()
   }
 
-  // Binary-search style: find the largest fontSize that still fits 
+  // Binary-search style: find the largest fontSize that still fits
   private adjust() {
     const el = this.el.nativeElement as HTMLElement
     const parentWidth = el.clientWidth
@@ -66,10 +66,10 @@ export class FitTextDirective implements AfterViewInit, OnDestroy {
       const mid = Math.floor((low + high) / 2)
       this.renderer.setStyle(el, 'fontSize', `${mid}px`)
       if (el.scrollWidth <= parentWidth) {
-        fitSize = mid 
+        fitSize = mid
         low = mid + 1
       } else {
-        high = mid - 1 
+        high = mid - 1
       }
     }
 

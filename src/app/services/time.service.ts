@@ -1,4 +1,4 @@
-// Angular Core 
+// Angular Core
 import { Injectable } from '@angular/core'
 
 // Date-FNS

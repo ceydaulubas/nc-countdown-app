@@ -1,4 +1,4 @@
-// Angular Core 
+// Angular Core
 import {
   Component,
   OnDestroy,
@@ -7,20 +7,20 @@ import {
   ChangeDetectorRef,
   ElementRef,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core'
 
 // Angular Common
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
 // Angular Material
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import {
-  MatDatepicker,
   MatDatepickerModule,
+  MatDatepicker,
 } from '@angular/material/datepicker'
 import { provideNativeDateAdapter } from '@angular/material/core'
 
@@ -51,21 +51,18 @@ import { TimeService } from '../../services/time.service'
   styleUrls: ['./countdown.component.scss'],
 })
 export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
-  constructor(
-    private timeService: TimeService,
-    private cdr: ChangeDetectorRef  
-  ) {}
-
-  countdownForm: CountdownForm = {
-    title: '',
-    date: null,
-  }
-
+  countdownForm: CountdownForm = { title: '', date: null }
   todayDate: Date = new Date()
+  public timeLeft = ''
   private intervalId: any
 
-  @ViewChild('titleElement') titleElement: ElementRef | undefined
-  @ViewChild('countdownElement') countdownElement: ElementRef | undefined
+  @ViewChild('titleElement') titleElement?: ElementRef
+  @ViewChild('countdownElement') countdownElement?: ElementRef
+
+  constructor(
+    private timeService: TimeService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.loadPersistedData()
@@ -73,20 +70,8 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Initial resize
     this.resizeText()
-
-    // Resize on window changes
     window.addEventListener('resize', () => this.resizeText())
-  }
-
-  resizeText() {
-    if (this.titleElement) {
-      this.titleElement.nativeElement.resizeText()
-    }
-    if (this.countdownElement) {
-      this.countdownElement.nativeElement.resizeText()
-    }
   }
 
   ngOnDestroy() {
@@ -96,42 +81,46 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     window.removeEventListener('resize', () => this.resizeText())
   }
 
+  // Title and countdown text are resized using the fit-text directive
+  private resizeText() {
+    this.titleElement?.nativeElement.resizeText()
+    this.countdownElement?.nativeElement.resizeText()
+  }
+
+  // Both the time difference is displayed on the screen and saved to localStorage
+  private updateTime() {
+    if (this.countdownForm.date) {
+      this.timeLeft = this.timeService.getTimeDifference(
+        this.countdownForm.date,
+      )
+      this.save('date', this.countdownForm.date)
+      this.cdr.markForCheck()
+    }
+  }
+
+  // When the date is selected, updateTime() is called immediately and every second
   startCountdown() {
     if (this.intervalId) {
       clearInterval(this.intervalId)
     }
-
-    this.intervalId = window.setInterval(() => {
-      this.calculateTimeDifference(this.countdownForm.date);
-      this.cdr.markForCheck();   
-    }, 1000);
-  
+    this.updateTime()
+    this.intervalId = window.setInterval(() => this.updateTime(), 1000)
   }
 
-
-  calculateTimeDifference(targetDate: Date | null): string {
-    if (targetDate) {
-      const difference = this.timeService.getTimeDifference(targetDate)
-      this.save('date', targetDate)
-      return difference
-    }
-    return ''
-  }
-
-  get camelCaseTitle() {
-    return this.countdownForm.title.replace(/\w\S*/g, function (txt: string) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-    })
+  get camelCaseTitle(): string {
+    return this.countdownForm.title.replace(
+      /\w\S*/g,
+      (txt: string) =>
+        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    )
   }
 
   private loadPersistedData() {
     const savedTitle = localStorage.getItem('title')
     const savedDate = localStorage.getItem('date')
-
     if (savedTitle) {
       this.countdownForm.title = savedTitle
     }
-
     if (savedDate && savedDate !== 'null' && savedDate !== 'undefined') {
       this.countdownForm.date = new Date(savedDate)
     }
@@ -151,7 +140,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     this.resizeText()
   }
 
-  isToday(date: Date | null): boolean {
+  public isToday(date: Date | null): boolean {
     if (!date) return false
     const today = new Date()
     return date.toDateString() === today.toDateString()
