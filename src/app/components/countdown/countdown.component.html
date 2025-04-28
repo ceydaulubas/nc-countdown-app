@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="countdown-content">
+    <div class="countdownHeader">
+      <span class="title" #titleElement appFitText>
+        {{
+          countdownForm.title
+            ? 'Time to ' + camelCaseTitle
+            : 'Enter Event Name and Date to See How Many Days Until!'
+        }}
+      </span>
+      <h1 class="date" #countdownElement appFitText>
+        {{
+          countdownForm.date
+            ? isToday(countdownForm.date)
+              ? '🎉🎉🎉🎉🎉🎉🎉🎉'
+              : calculateTimeDifference(countdownForm.date)
+            : 'No date selected yet. Please select date.'
+        }}
+      </h1>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          placeholder="Time to …"
+          [(ngModel)]="countdownForm.title"
+          (keyup)="titleChange($event)"
+        />
+        <mat-icon matSuffix class="mat-icon-dark-grey">create</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [min]="todayDate"
+          [(ngModel)]="countdownForm.date"
+          readonly
+          (dateChange)="startCountdown()"
+          placeholder="Select date"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+        #picker
+        panelClass="custom-datepicker"
+        >
+      </mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
