@@ -8,7 +8,7 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectionStrategy,
-  NgZone
+  NgZone,
 } from '@angular/core'
 
 // Angular Common
@@ -33,7 +33,7 @@ import { FitTextDirective } from '../../directives/fit-text.directive'
 
 // Services
 import { TimeService } from '../../services/time.service'
-import confetti from 'canvas-confetti';
+import confetti from 'canvas-confetti'
 
 @Component({
   selector: 'app-countdown',
@@ -57,7 +57,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
   todayDate: Date = new Date()
   public timeLeft = ''
   private intervalId: any
-  private hasCelebrated = false;
+  private hasCelebrated = false
 
   @ViewChild('titleElement') titleElement?: ElementRef
   @ViewChild('countdownElement') countdownElement?: ElementRef
@@ -65,7 +65,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private timeService: TimeService,
     private cdr: ChangeDetectorRef,
-    private ngZone: NgZone   
+    private ngZone: NgZone,
   ) {}
 
   ngOnInit() {
@@ -93,10 +93,10 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Both the time difference is displayed on the screen and saved to localStorage
   private updateTime() {
-    if (!this.countdownForm.date) return;
-    this.timeLeft = this.timeService.getTimeDifference(this.countdownForm.date);
-    this.save('date', this.countdownForm.date);
-    this.cdr.detectChanges();
+    if (!this.countdownForm.date) return
+    this.timeLeft = this.timeService.getTimeDifference(this.countdownForm.date)
+    this.save('date', this.countdownForm.date)
+    this.cdr.detectChanges()
   }
 
   startCountdown() {
@@ -153,7 +153,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     this.countdownForm.title = e.target.value
     this.save('title', this.countdownForm.title)
     this.resizeText()
-    this.cdr.detectChanges();  
+    this.cdr.detectChanges()
   }
 
   public isToday(date: Date | null): boolean {

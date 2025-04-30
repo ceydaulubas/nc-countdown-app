@@ -5,16 +5,15 @@
         {{
           countdownForm.title
             ? 'Time to ' + camelCaseTitle
-            : 'Enter Event Name and Date to See How Many Days Until!'
+            : 'Enter Event Name & Date to Start✨'
         }}
       </h1>
       <p class="date" #countdownElement appFitText>
         {{
           countdownForm.date
-            ?
-              timeLeft
+            ? timeLeft
             : 'No date selected yet. Please select date.'
-        }}      
+        }}
       </p>
     </header>
 
@@ -33,14 +32,14 @@
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Date</mat-label>
         <input
-        matInput
-        [matDatepicker]="picker"
-        [min]="todayDate"
-        [(ngModel)]="countdownForm.date"
-        (ngModelChange)="startCountdown()"
-        readonly
-        placeholder="Select date"
-      />     
+          matInput
+          [matDatepicker]="picker"
+          [min]="todayDate"
+          [(ngModel)]="countdownForm.date"
+          (ngModelChange)="startCountdown()"
+          readonly
+          placeholder="Select date"
+        />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
