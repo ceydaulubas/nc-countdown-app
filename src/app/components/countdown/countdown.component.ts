@@ -8,6 +8,7 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectionStrategy,
+  NgZone
 } from '@angular/core'
 
 // Angular Common
@@ -64,6 +65,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private timeService: TimeService,
     private cdr: ChangeDetectorRef,
+    private ngZone: NgZone   
   ) {}
 
   ngOnInit() {
@@ -94,24 +96,30 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.countdownForm.date) return;
     this.timeLeft = this.timeService.getTimeDifference(this.countdownForm.date);
     this.save('date', this.countdownForm.date);
-    this.cdr.markForCheck();
+    this.cdr.detectChanges();
   }
 
-  // When the date is selected, updateTime() is called immediately and every second
   startCountdown() {
     if (this.intervalId) {
       clearInterval(this.intervalId)
     }
-      // if the date is today and the title is not empty, confetti is shown 2 times
-      if (
-        this.isToday(this.countdownForm.date) &&
-        this.countdownForm.title?.trim().length > 0
-      ) {
-        confetti({ particleCount: 800, spread: 800, origin: { y: 0.5 } });
-        confetti({ particleCount: 1000, spread: 1000, origin: { y: 0.5 } });
-      }
+    if (
+      this.isToday(this.countdownForm.date) &&
+      this.countdownForm.title?.trim().length > 0
+    ) {
+      confetti({ particleCount: 800, spread: 800, origin: { y: 0.5 } })
+      confetti({ particleCount: 1000, spread: 1000, origin: { y: 0.5 } })
+    }
     this.updateTime()
-    this.intervalId = window.setInterval(() => this.updateTime(), 1000)
+    // Every second, update the countdown: interval is started outside the zone for performance,
+    // then on every tick, trigger Angular change detection
+    this.ngZone.runOutsideAngular(() => {
+      this.intervalId = window.setInterval(() => {
+        this.ngZone.run(() => {
+          this.updateTime()
+        })
+      }, 1000)
+    })
   }
 
   get camelCaseTitle(): string {
@@ -145,6 +153,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     this.countdownForm.title = e.target.value
     this.save('title', this.countdownForm.title)
     this.resizeText()
+    this.cdr.detectChanges();  
   }
 
   public isToday(date: Date | null): boolean {

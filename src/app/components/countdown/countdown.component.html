@@ -33,14 +33,14 @@
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Date</mat-label>
         <input
-          matInput
-          [matDatepicker]="picker"
-          [min]="todayDate"
-          [(ngModel)]="countdownForm.date"
-          readonly
-          (dateChange)="startCountdown()"
-          placeholder="Select date"
-        />
+        matInput
+        [matDatepicker]="picker"
+        [min]="todayDate"
+        [(ngModel)]="countdownForm.date"
+        (ngModelChange)="startCountdown()"
+        readonly
+        placeholder="Select date"
+      />     
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
