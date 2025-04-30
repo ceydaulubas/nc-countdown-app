@@ -11,11 +11,10 @@
       <p class="date" #countdownElement appFitText>
         {{
           countdownForm.date
-            ? isToday(countdownForm.date)
-              ? '🎉🎉🎉🎉🎉🎉🎉🎉'
-              : timeLeft
+            ?
+              timeLeft
             : 'No date selected yet. Please select date.'
-        }}
+        }}      
       </p>
     </header>
 

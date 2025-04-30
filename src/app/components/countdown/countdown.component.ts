@@ -32,6 +32,7 @@ import { FitTextDirective } from '../../directives/fit-text.directive'
 
 // Services
 import { TimeService } from '../../services/time.service'
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-countdown',
@@ -55,6 +56,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
   todayDate: Date = new Date()
   public timeLeft = ''
   private intervalId: any
+  private hasCelebrated = false;
 
   @ViewChild('titleElement') titleElement?: ElementRef
   @ViewChild('countdownElement') countdownElement?: ElementRef
@@ -89,13 +91,10 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Both the time difference is displayed on the screen and saved to localStorage
   private updateTime() {
-    if (this.countdownForm.date) {
-      this.timeLeft = this.timeService.getTimeDifference(
-        this.countdownForm.date,
-      )
-      this.save('date', this.countdownForm.date)
-      this.cdr.markForCheck()
-    }
+    if (!this.countdownForm.date) return;
+    this.timeLeft = this.timeService.getTimeDifference(this.countdownForm.date);
+    this.save('date', this.countdownForm.date);
+    this.cdr.markForCheck();
   }
 
   // When the date is selected, updateTime() is called immediately and every second
@@ -103,6 +102,14 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.intervalId) {
       clearInterval(this.intervalId)
     }
+      // if the date is today and the title is not empty, confetti is shown 2 times
+      if (
+        this.isToday(this.countdownForm.date) &&
+        this.countdownForm.title?.trim().length > 0
+      ) {
+        confetti({ particleCount: 800, spread: 800, origin: { y: 0.5 } });
+        confetti({ particleCount: 1000, spread: 1000, origin: { y: 0.5 } });
+      }
     this.updateTime()
     this.intervalId = window.setInterval(() => this.updateTime(), 1000)
   }

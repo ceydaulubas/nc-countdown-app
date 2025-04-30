@@ -4,6 +4,11 @@ $gap: 1rem;
 $formMaxWidth: 400px;
 $formHeight: 48px;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
 main.container {
   display: flex;
   justify-content: center;
@@ -37,7 +42,7 @@ h1.countdown-title {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
   color: $purple;
   font-weight: 800;
 }
@@ -47,7 +52,7 @@ p.date {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
   font-weight: 400;
   margin: 0;
   line-height: 1.2;
