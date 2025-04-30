@@ -8,7 +8,12 @@
             : 'Enter Event Name & Date to Start✨'
         }}
       </h1>
-      <p class="date" #countdownElement appFitText [ngClass]="{ 'no-date-selected': !countdownForm.date }">
+      <p
+        class="date"
+        #countdownElement
+        appFitText
+        [ngClass]="{ 'no-date-selected': !countdownForm.date }"
+      >
         {{
           countdownForm.date
             ? timeLeft
