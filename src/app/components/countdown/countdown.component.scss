@@ -109,3 +109,16 @@ p.date {
 .mat-icon-dark-grey {
   color: #3f3e3e;
 }
+
+
+/* Style for the container holding the date input and icons */
+.date-container {
+  display: flex;
+  align-items: center;
+  height: 20px;
+
+}
+
+button.mat-icon-button mat-icon.delete-icon {
+  color: #3f3e3e;
+}

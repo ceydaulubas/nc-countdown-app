@@ -161,4 +161,13 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     const today = new Date()
     return date.toDateString() === today.toDateString()
   }
+
+  public resetDate() {
+    this.countdownForm.date = null; // Reset the date
+    this.timeLeft = ''; // Reset the timeLeft
+    this.save('date', null); // Remove from localStorage
+    this.startCountdown(); // Restart the countdown with no date
+  }
+  
+
 }

@@ -31,19 +31,25 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          [min]="todayDate"
-          [(ngModel)]="countdownForm.date"
-          (ngModelChange)="startCountdown()"
-          readonly
-          placeholder="Select date"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
+        <div class="date-container">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [min]="todayDate"
+            [(ngModel)]="countdownForm.date"
+            (ngModelChange)="startCountdown()"
+            readonly
+            placeholder="Select date"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <!-- Clear Date Button with Trash Icon placed next to the calendar icon -->
+          <button mat-icon-button *ngIf="countdownForm.date" (click)="resetDate()">
+            <mat-icon class="delete-icon">delete</mat-icon>
+          </button>
+        </div>
         <mat-datepicker #picker panelClass="custom-datepicker">
         </mat-datepicker>
       </mat-form-field>
