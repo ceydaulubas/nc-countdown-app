@@ -113,7 +113,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     this.updateTime()
     // Every second, update the countdown: interval is started outside the zone for performance,
     // then on every tick, trigger Angular change detection
-    this.ngZone.runOutsideAngular(() => {
+    this.ngZone.run(() => {
       this.intervalId = window.setInterval(() => {
         this.ngZone.run(() => {
           this.updateTime()
