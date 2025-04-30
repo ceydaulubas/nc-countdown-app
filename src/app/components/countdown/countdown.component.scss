@@ -43,9 +43,17 @@ h1.countdown-title {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  // text-overflow: ellipsis;
   color: $purple;
   font-weight: 800;
+}
+
+.no-date-selected {
+  font-size: clamp(1rem, 2vw, 3rem) !important; 
+  font-weight: 300 !important;
+  color: rgb(15, 3, 35);
+  text-align: center; 
+  width: 100%;
+  display: block; 
 }
 
 p.date {
@@ -53,10 +61,10 @@ p.date {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  // text-overflow: ellipsis;
   font-weight: 400;
   margin: 0;
   line-height: 1.2;
+  text-align: center;
 }
 
 .form-fields {
@@ -89,12 +97,10 @@ p.date {
 :host ::ng-deep {
   .mat-form-field-appearance-outline .mat-form-field-flex {
     min-height: $formHeight !important;
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
+    padding: 4px 0 !important;
   }
   .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
+    padding: 4px 0 !important;
   }
   .mat-input-element {
     padding: 0 0.5rem !important;
@@ -109,3 +115,5 @@ p.date {
 .mat-icon-dark-grey {
   color: #3f3e3e;
 }
+
+
