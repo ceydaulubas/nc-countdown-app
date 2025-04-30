@@ -1,59 +1,63 @@
-# NcCountdownApp
+# Countdown Web Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+This is a countdown web application developed as a solution to the **Natural Cycles Frontend Challenge**. The application is built using **Angular 19.2.9** and **Angular Material** for UI components, ensuring responsiveness and a smooth user experience.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Countdown timer that displays the time remaining until the specified end date.
+- Ability to define the event name and the end date.
+- Responsive design that works well in both portrait and landscape orientations.
+- If the event date is set to today and a title is provided, a celebratory confetti effect is displayed to enhance the user experience.
+- Persistence of event name and end date between page reloads using **localStorage**.
+- Code formatted using **Prettier** for consistency and readability.
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Before proceeding with the installation, make sure you have Node.js and npm installed on your machine.
 
-## Code scaffolding
+1. Clone the repository: `git clone <repository-url>`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+2. Navigate to the project directory: `cd nc-countdown-app`
 
-```bash
-ng generate component component-name
-```
+3. Install dependencies: `npm install`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
 
-```bash
-ng generate --help
-```
+1. Start the development server: `ng serve`
 
-## Building
+2. Open your browser and visit `http://localhost:4200`.
 
-To build the project run:
+3. Specify the end date and event name in the input fields.
 
-```bash
-ng build
-```
+4. The countdown timer will start automatically, displaying the time remaining to the specified end date.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Mobile & Tablet & Desktop Views
 
-## Running unit tests
+<div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017526/nc_countdown/Screenshot_2025-04-30_at_14.51.56_robdet.png" alt=" Mobile View" width="450" style="margin: 50px;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017488/nc_countdown/Screenshot_2025-04-30_at_14.51.13_yarlnm.png" alt=" Tablet View" width="450" style="margin: 50px;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017443/nc_countdown/Screenshot_2025-04-30_at_14.47.53_isewlg.png" alt="Desktop View" width="450" style="margin: 50px;"> a
+</div>
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+<div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017890/nc_countdown/Screenshot_2025-04-30_at_14.57.52_ytnh93.png" alt="Countdown Timer" width="900" style="margin: 50px;">
+</div>
 
-```bash
-ng test
-```
+<div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017943/nc_countdown/Screenshot_2025-04-30_at_14.58.51_lhe85u.png" alt="Event Details" width="300" height="auto" style="margin: 50px;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746018013/nc_countdown/Screenshot_2025-04-30_at_14.59.59_onuy8s.png" alt="Event Date Picker" width="300" height="auto" style="margin: 50px;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746017713/nc_countdown/Screenshot_2025-04-30_at_14.54.31_p3qats.png" alt="Mobile Countdown View" width="300" height="auto" style="padding: 50px;">
+    <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746018742/nc_countdown/Screenshot_2025-04-30_at_15.12.09_ltf2ok.png" alt="Mobile Countdown View" width="300" height="auto" style="padding: 50px;">
+</div>
 
-## Running end-to-end tests
+## Improvement Suggestions
 
-For end-to-end (e2e) testing, run:
+- Date Removal Button: A feature to remove the selected event date has been worked on in the `feature/add-delete-date-button` branch. Unfortunately, there are a few bugs that haven't been fully resolved yet, so it hasn't been merged into the main branch.
+- Implement unit tests for critical components and functionality.
+- Support Multiple Languages: Implement functionality to display the countdown and event details in different languages, allowing users to interact with the app in their native language.
+- To enhance user experience, ai can be used to find the event details entered and redirect to the event's website.
+- Notifications & Reminders: Add notifications or reminders to alert users as the event approaches, or if the event date is changed.
+- Social Sharing Integration: Allow users to share the countdown event on social media platforms like Instagram, X, or WhatsApp to spread awareness about the event.
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
