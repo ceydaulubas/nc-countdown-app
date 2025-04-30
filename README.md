@@ -50,6 +50,12 @@ Before proceeding with the installation, make sure you have Node.js and npm inst
     <img src="https://res.cloudinary.com/dxqyvjf5r/image/upload/v1746018742/nc_countdown/Screenshot_2025-04-30_at_15.12.09_ltf2ok.png" alt="Mobile Countdown View" width="300" height="auto" style="padding: 50px;">
 </div>
 
+## Deployment
+
+The application deployed to Netlify.
+
+[Live Demo](https://ncountdown.netlify.app/)
+
 ## Improvement Suggestions
 
 - Date Removal Button: A feature to remove the selected event date has been worked on in the `feature/add-delete-date-button` branch. Unfortunately, there are a few bugs that haven't been fully resolved yet, so it hasn't been merged into the main branch.
