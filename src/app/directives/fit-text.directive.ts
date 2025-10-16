@@ -65,6 +65,8 @@ export class FitTextDirective implements AfterViewInit, OnDestroy {
     while (low <= high) {
       const mid = Math.floor((low + high) / 2)
       this.renderer.setStyle(el, 'fontSize', `${mid}px`)
+      // if the text fits, try a larger size
+      // if the text doesn't fit, try a smaller size
       if (el.scrollWidth <= parentWidth) {
         fitSize = mid
         low = mid + 1

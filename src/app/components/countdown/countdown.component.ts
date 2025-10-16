@@ -1,13 +1,21 @@
 // Angular Core
 import {
-  Component,
+  Component, // angular bilesenini tanimlar
+
+  // Bileşenin yaşam döngüsü metodlarını kullanmak için import edilmiştir.
   OnDestroy,
   OnInit,
+  AfterViewInit,
+
+  // Bilesenin sablondaki bir DOM ogesine erismek için kullanılır.
   ViewChild,
+
+  // Değişim algılama mekanizmasını manuel olarak tetiklemek için kullanılır.
   ChangeDetectorRef,
   ElementRef,
-  AfterViewInit,
   ChangeDetectionStrategy,
+
+  // Performans için, bileşen dışındaki işlerin Angular dışı bir ortamda çalışmasını sağlamak amacıyla kullanılır.
   NgZone,
 } from '@angular/core'
 
@@ -19,10 +27,7 @@ import { FormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import {
-  MatDatepickerModule,
-  MatDatepicker,
-} from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { provideNativeDateAdapter } from '@angular/material/core'
 
 // Interfaces
@@ -38,7 +43,7 @@ import confetti from 'canvas-confetti'
 @Component({
   selector: 'app-countdown',
   templateUrl: './countdown.component.html',
-  standalone: true,
+  standalone: true, // Bileşenin kendi başına çalışmasını sağlayan bir Angular 15 özelliği.
   providers: [provideNativeDateAdapter()],
   imports: [
     MatFormFieldModule,
@@ -126,7 +131,7 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.countdownForm.title.replace(
       /\w\S*/g,
       (txt: string) =>
-        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+        txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(),
     )
   }
 
@@ -136,8 +141,20 @@ export class CountdownComponent implements OnInit, OnDestroy, AfterViewInit {
     if (savedTitle) {
       this.countdownForm.title = savedTitle
     }
+    // if (savedDate && savedDate !== 'null' && savedDate !== 'undefined') {
+    //   this.countdownForm.date = new Date(savedDate)
+    // }
+
     if (savedDate && savedDate !== 'null' && savedDate !== 'undefined') {
-      this.countdownForm.date = new Date(savedDate)
+      const parsedDate = new Date(savedDate)
+
+      if (!isNaN(parsedDate.getTime())) {
+        this.countdownForm.date = parsedDate
+      } else {
+        this.countdownForm.date = null // if savedDate is not a valid date, set date to null
+      }
+    } else {
+      this.countdownForm.date = null // if savedDate is null or undefined, set date to null
     }
   }
 
